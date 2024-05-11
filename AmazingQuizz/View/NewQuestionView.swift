@@ -13,12 +13,12 @@ struct NewQuestionView: View {
     @Environment(\.modelContext) var modelContext
     
     @Bindable var questionCollection: QuestionCollection
-
-//MARK: Next, j'aimerai rester dans cette vue pour créer à la chaine des questions, les une à la suite des autres...
-//    @State private var pushNextNewQuestionView = false
+    
+    //MARK: Next, I'd like to stay in this view to create a series of questions, one after the other...
+    //    @State private var pushNextNewQuestionView = false
     
     @State private var counterAnswer = Array(repeating: 1, count: 1)
-        
+    
     //MARK: Question
     @State private var title = ""
     @State private var hintOrCorrectAnswer
@@ -53,13 +53,17 @@ struct NewQuestionView: View {
                             Spacer()
                             Text("Your answers")
                                 .font(.system(.title, design: .rounded, weight: .bold))
+                                .accessibilityAddTraits(.isHeader)
+                                .accessibilityHeading(.h1)
+                            
                             Spacer()
                         }
                         .offset(y: -16)
                         Text(
                                                 """
-                                                Ajouter le nombre de réponse que vous voulez.
-                                                **Conseil: nous vous conseillons de vous limiter à un nombre maximum de 5 réponses.**
+                                                Add the number of answers you want.
+                                                
+                                                **Tip: we advise you to limit your answers to a maximum of 5.**
                                                 """
                         )
                         .foregroundStyle(.secondary)
@@ -71,13 +75,10 @@ struct NewQuestionView: View {
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .underline()
                             .padding(.vertical, 2)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityHeading(.h2)
                         
                         ForEach($answers.indices, id: \.self) { index in
-                            //                            CcustomTextFieldOfAnswer(
-                            //                                statusAnswer: $answers[index].status,
-                            //                                answer: $answers[index].title,
-                            //                                numberAnswer: $numberAnswer
-                            //                            )
                             CcustomTextFieldOfAnswer(
                                 statusAnswer: $answers[index].status,
                                 answer: $answers[index].title,
@@ -96,7 +97,8 @@ struct NewQuestionView: View {
                                 .buttonStyle(.customButtonStyle_OrangeBouncy)
                                 .opacity(!questionIsEmpty ? 0.4 : 1)
                                 .disabled(!questionIsEmpty)
-                                
+                                .accessibilityHint(!questionIsEmpty ? "To add a second answer, you must fill out the text fields, the 'Title question', and  the 'hint or correct answer'." : "")
+
                                 Spacer()
                             }
                             .padding(.top)
@@ -116,10 +118,10 @@ struct NewQuestionView: View {
             .scrollContentBackground(.hidden)
             .toolbarBackground(.backgroundColor5, for: .bottomBar, .navigationBar)
             .background(.backgroundColor5)
-//MARK: Next, j'aimerai rester dans cette vue pour créer à la chaine des questions, les une à la suite des autres...
-//            .navigationDestination(isPresented: $pushNextNewQuestionView) {
-//                NewQuestionView(questionCollection: questionCollection)
-//                        }
+    //MARK: Next, I'd like to stay in this view to create a series of questions, one after the other...
+            //            .navigationDestination(isPresented: $pushNextNewQuestionView) {
+            //                NewQuestionView(questionCollection: questionCollection)
+            //                        }
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
             .navigationTitle("New Question!")
@@ -142,30 +144,32 @@ struct NewQuestionView: View {
                     .buttonStyle(CustomStyleToolbarItem_Simple(color: .accent))
                     .opacity(!isCorrectQuestion ? 0.4 : 1)
                     .disabled(!isCorrectQuestion)
+                    .accessibilityHint(!isCorrectQuestion ? "To save the new question to your collection, you must complete the two text fields: 'Title Question' and 'Hint or Correct Answer'. Additionally, you need to create at least two answers—one correct and one incorrect—before you can save your question." : "")
+
                 }
             }
-//MARK: Next, j'aimerai rester dans cette vue pour créer à la chaine des questions, les une à la suite des autres...
-//            .toolbar {
-//                ToolbarItemGroup(placement: .bottomBar) {
-//                    HStack {
-//                        Spacer()
-//                        Button {
-//                            addQuestion()
-//                            pushNextNewQuestionView = true
-//                        } label: {
-//                            Label("Add agin a new question", systemImage: "plus")
-//                        }
-//                        .buttonStyle(CustomStyleToolbarItem_Simple(color: .complementary))
-//                    }
-//                }
-//            }
+    //MARK: Next, j'aimerai rester dans cette vue pour créer à la chaine des questions, les une à la suite des autres...
+            //            .toolbar {
+            //                ToolbarItemGroup(placement: .bottomBar) {
+            //                    HStack {
+            //                        Spacer()
+            //                        Button {
+            //                            addQuestion()
+            //                            pushNextNewQuestionView = true
+            //                        } label: {
+            //                            Label("Add agin a new question", systemImage: "plus")
+            //                        }
+            //                        .buttonStyle(CustomStyleToolbarItem_Simple(color: .complementary))
+            //                    }
+            //                }
+            //            }
         }
     }
     
     private var questionIsEmpty: Bool {
         !title.isEmpty && !hintOrCorrectAnswer.isEmpty
     }
-
+    
     private var isCorrectQuestion: Bool  {
         questionIsEmpty && answers.contains(where: {
             $0.status == .correct

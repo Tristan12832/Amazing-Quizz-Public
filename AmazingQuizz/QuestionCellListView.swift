@@ -70,8 +70,14 @@ struct QuestionCellListView: View {
         .padding(4)
         .background(.backgroundColor3)
         .clipShape(.rect(cornerRadius: 16))
-//        .fixedSize(horizontal: false, vertical: true)
-        .accessibilityElement()
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            """
+            \(questionCollection.title), description: \(questionCollection.commentary),
+            \(questionCollection.isWin ? "is successful": ""),
+            \(questionCollection.isFavorite ? "is marked as favorite" : ""), \(questionCollection.isComplet ? "is marked as complete." : "").
+            """
+        )
         .swipeActions(edge: .leading, allowsFullSwipe: false) {
             Button {
                 withAnimation(.easeOut) {

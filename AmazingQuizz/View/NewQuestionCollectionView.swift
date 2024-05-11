@@ -43,25 +43,6 @@ struct NewQuestionCollectionView: View {
                 .padding(.horizontal, 20)
                 
                 VStack(alignment: .center, spacing: 0) {
-//                    CustomMainActionButton(
-//                        title: "Creat!"
-//                    ) {
-//                        withAnimation {
-//                            let newQuestionCollection = QuestionCollection(
-//                                icon: icon,
-//                                title: title,
-//                                commentary: commentary,
-//                                color: iconColor.toHexString()!,
-//                                isFavorite: false,
-//                                isComplet: false,
-//                                isWin: false
-//                            )
-//                            modelContext.insert(
-//                                newQuestionCollection
-//                            )
-//                            dismiss()
-//                        }
-//                    }
                         Button {
                             withAnimation {
                                 let newQuestionCollection = QuestionCollection(
@@ -85,6 +66,7 @@ struct NewQuestionCollectionView: View {
                     .opacity(title.isEmpty ? 0.6 : 1)
                     .padding(20)
                     .disabled(title.isEmpty ? true : false)
+                    .accessibilityHint(title.isEmpty ? "To create a new quiz collection, you must fill out the text field, 'Title'." : "")
                     
                     if title.isEmpty {
                         Text("You must at least complete the text field, \"title of the question collection\" to creat a new collection!")

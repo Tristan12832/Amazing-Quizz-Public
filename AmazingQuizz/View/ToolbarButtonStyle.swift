@@ -1,5 +1,5 @@
 //
-//  toolbarButtonStyle.swift
+//  ToolbarButtonStyle.swift
 //  AmazingQuizz
 //
 //  Created by Tristan Stenuit on 11/02/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct toolbarButtonStyle: ButtonStyle {
+struct ToolbarButtonStyle: ButtonStyle {
     var color: Color = .accent
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -17,6 +17,7 @@ struct toolbarButtonStyle: ButtonStyle {
             .opacity(configuration.isPressed ? 0.5 : 1)
             .scaleEffect(configuration.isPressed ? 0.5 : 1.0)
             .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+            .shadow(radius: 10)
     }
 }
 
@@ -24,5 +25,5 @@ struct toolbarButtonStyle: ButtonStyle {
     Button(action: { print("Pressed") }) {
         Label("Press Me", systemImage: "star")
     }
-    .buttonStyle(toolbarButtonStyle())
+    .buttonStyle(ToolbarButtonStyle())
 }

@@ -5,6 +5,7 @@
 //  Created by Tristan Stenuit on 03/04/2024.
 //
 
+import SwiftData
 import SwiftUI
 
 struct AnswerCellView: View {
@@ -43,10 +44,23 @@ struct AnswerCellView: View {
 }
 
 #Preview {
-    AnswerCellView(answer: Answer()) {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Answer.self, configurations: config)
+    
+    let example = Answer(
+        title: "Test",
+        status: .correct,
+        isAnswered: false
+    )
+    container.mainContext.insert(example)
+    
+    return AnswerCellView(answer: example) {
         print("")
     }
+    .modelContainer(container)
 }
+
+//MARK: Other model
 struct AnswerCellView2: View {
     @Binding var isColorButton: Bool
     

@@ -28,7 +28,7 @@ struct QuestionCollectionLandscapeView: View {
                         Button("Add a new quiz collection", systemImage: "plus") {
                             self.showNewCollection = true
                         }
-                        .buttonStyle(toolbarButtonStyle())
+                        .buttonStyle(ToolbarButtonStyle())
                     }
                 }
                 .sheet(isPresented: $showNewCollection) {

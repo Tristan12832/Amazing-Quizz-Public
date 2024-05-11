@@ -17,6 +17,9 @@ struct CustomTextEditor: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.system(.title2, design: .rounded, weight: .bold))
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
+
             TextField(titleTextField, text: $text, axis: .vertical)
                 .lineLimit(10, reservesSpace: true)
                 .padding()

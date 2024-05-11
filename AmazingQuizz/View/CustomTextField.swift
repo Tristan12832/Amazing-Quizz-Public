@@ -17,6 +17,9 @@ struct CustomTextField: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.system(.title2, design: .rounded, weight: .bold))
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
+
             TextField(titleTextField, text: $text)
                 .padding()
                 .scrollContentBackground(.hidden)

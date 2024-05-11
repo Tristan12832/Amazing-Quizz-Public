@@ -4,7 +4,8 @@
 //
 //  Created by Tristan Stenuit on 10/02/2024.
 //
-// 
+// //MARK: Note:
+// This extension was created by Max Alexander and can be found on the page: https://ditto.live/blog/swift-hex-color-extension
 
 import SwiftUI
 

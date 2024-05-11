@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
-//    @State private var selection: QuestionCollection?
     
     @Query(sort: \QuestionCollection.title) var questionCollections: [QuestionCollection]
     

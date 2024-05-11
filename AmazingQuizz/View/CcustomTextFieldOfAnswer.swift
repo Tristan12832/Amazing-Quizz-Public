@@ -25,6 +25,9 @@ struct CcustomTextFieldOfAnswer: View {
     var body: some View {
         Text("Answer n°\(numberAnswer)")
             .font(.system(.title2, design: .rounded, weight: .bold))
+            .accessibilityAddTraits(.isHeader)
+            .accessibilityHeading(.h3)
+        
         HStack {
             TextField("Write your answer n°\(numberAnswer)", text: $answer)
                 .foregroundStyle(colorTextField)

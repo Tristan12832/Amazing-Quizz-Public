@@ -23,7 +23,7 @@ struct CustomMainActionButton: View {
                 .frame(maxWidth: .infinity)
                 .background(color)
                 .clipShape(RoundedRectangle(cornerRadius: .infinity))
-                .shadow(radius: 8)
+                .shadow(radius: 10)
         }
     }
 }

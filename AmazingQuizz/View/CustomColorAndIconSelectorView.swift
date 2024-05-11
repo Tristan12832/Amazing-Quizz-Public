@@ -56,6 +56,9 @@ struct CustomColorAndIconSelectorView: View {
             Text("Selecte your icon and this color for your new question collection!")
                 .font(.system(.title2, design: .rounded, weight: .bold))
                 .padding(.vertical, 8)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
+            
             VStack(spacing: 0) {
                 ColorPicker("Set the icon color", selection: $colorIcon, supportsOpacity: false)
                     .font(.title3)

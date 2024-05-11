@@ -10,12 +10,9 @@ import SwiftUI
 
 struct QuestionCellView: View {
     var index: Int
-    //    var title: String
+
     var numberLineLimit: Int
-    //    
-    //    @Binding var isCorrectAnswer: Bool
-    //    @Binding var isPlaying: Bool
-    //    
+ 
     @Bindable var question: MCQQuestion
     
     var body: some View {
@@ -51,6 +48,12 @@ struct QuestionCellView: View {
         .frame(maxWidth: .infinity)
         .frame(maxHeight: 100)
         .fixedSize(horizontal: false, vertical: true)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            """
+            Question number\(question.index + 1), \(question.title), \(question.questionAnswered ? "is correct!":"is incorrect!")
+            """
+        )
     }
 }
 

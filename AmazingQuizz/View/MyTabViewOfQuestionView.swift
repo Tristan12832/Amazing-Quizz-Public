@@ -45,6 +45,7 @@ struct MyTabViewOfQuestionView: View {
                             Label("Past", systemImage: "arrow.left")
                         }
                         .buttonStyle(NextOrPastButton(foregroundColor: .red))
+                        .accessibilityHint("Press to move to the previous question.")
                     }
                 }
             }
@@ -59,6 +60,7 @@ struct MyTabViewOfQuestionView: View {
                             Label("Result", systemImage: "arrow.right")
                         }
                         .buttonStyle(NextOrPastButton(foregroundColor: .white))
+                        .accessibilityHint("Press to end the game and go to results.")
                     } else {
                         Button {
                             withAnimation(.bouncy(duration: 0.66)) {
@@ -70,10 +72,12 @@ struct MyTabViewOfQuestionView: View {
                             Label("Next", systemImage: "arrow.right")
                         }
                         .buttonStyle(NextOrPastButton(foregroundColor: .green))
+                        .accessibilityHint("Press to move on to the next question.")
                     }
                 }
             }
             .navigationBarBackButtonHidden(true)
+            .toolbarBackground(.hidden, for: .automatic)
         }
         .statusBarHidden()
     }

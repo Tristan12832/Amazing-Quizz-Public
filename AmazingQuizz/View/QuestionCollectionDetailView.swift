@@ -49,15 +49,21 @@ struct QuestionCollectionDetailView: View {
                         }
                         
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Icon: \(questionCollection.icon)")
                     
                     VStack(alignment:.leading, spacing: 4){
                         Text(questionCollection.title)
                             .font(.system(.largeTitle, design: .rounded, weight: .bold))
                             .padding(.vertical)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityHeading(.h1)
                         
                         Text("Commentary:")
                             .font(.system(.title3, design: .rounded, weight: .bold))
                             .underline()
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityHeading(.h2)
                         
                         Text(questionCollection.commentary)
                             .lineLimit(10)
@@ -68,6 +74,8 @@ struct QuestionCollectionDetailView: View {
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .underline()
                             .padding(.vertical)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityHeading(.h2)
                         
                         VStack {
                             ForEach(questionsView.indices, id: \.self) { question in
@@ -109,7 +117,7 @@ struct QuestionCollectionDetailView: View {
             .toolbarBackground(.backgroundColor5, for: .bottomBar, .navigationBar)
             .scrollIndicators(.hidden)
             .background(.backgroundColor5)
-            .toolbarBackground(.backgroundColor5.opacity(0.5))
+            .toolbarBackground(.hidden, for: .navigationBar)
             .navigationBarBackButtonHidden(true)
             .navigationDestination(isPresented: $letGoPlaying) {
                 MyTabViewOfQuestionView(collection: questionCollection)
@@ -125,13 +133,16 @@ struct QuestionCollectionDetailView: View {
                         }
                     }
                     .buttonStyle(CustomStyleToolbarItem_Simple(color: .yellow))
+                    .accessibilityHint(questionCollection.isFavorite ? "Press favorite to unmark the collection as a favorite" : "Press favorite to mark the collection as a favorite.")
+
                     Button("Completed", systemImage: questionCollection.isComplet ? "checkmark.seal.fill" : "checkmark.seal") {
                         withAnimation {
                             questionCollection.isComplet.toggle()
                         }
                     }
                     .buttonStyle(CustomStyleToolbarItem_Simple(color: .blue))
-                    
+                    .accessibilityHint(questionCollection.isComplet ? "Press complete to unmark the collection as a completed." : "Press complete to mark the collection as a completed.")
+
                 }
                 
             }
@@ -157,6 +168,8 @@ struct QuestionCollectionDetailView: View {
                             Label("Add agin a new question", systemImage: "plus")
                         }
                         .buttonStyle(CustomButtonStyle_BlueBouncy())
+                        .accessibilityHint("Press to add a new question.")
+
                     }
                 }
             }

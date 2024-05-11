@@ -45,7 +45,8 @@ struct QuestionCollectionListView: View {
                     Button("Add a new quiz collection", systemImage: "plus") {
                         self.showNewCollection = true
                     }
-                    .buttonStyle(toolbarButtonStyle())
+                    .buttonStyle(ToolbarButtonStyle())
+                    .accessibilityHint("Press 'Add New Quiz Collection' to create a new quiz collection in your list within the application!")
                 }
             }
             .sheet(isPresented: $showNewCollection) {

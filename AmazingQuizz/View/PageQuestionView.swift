@@ -32,6 +32,8 @@ struct PageQuestionView: View {
                             }
                         }
                         .buttonStyle(.customButtonStyle_OrangeBouncy)
+                        .accessibilityHint("Press ‘reset’ to reset the current question.")
+
                     }
                 }
                 .padding(.horizontal)
@@ -114,16 +116,27 @@ struct QuestionContent: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
-            Text("Question !")
-                .font(.system(.largeTitle, design: .rounded, weight: .black))
-            Text("\(questionNumber) / \(totalQuestions)")
-                .font(.system(.largeTitle, design: .rounded, weight: .black))
+            VStack {
+                Text("Question !")
+                    .font(.system(.largeTitle, design: .rounded, weight: .black))
+                Text("\(questionNumber) / \(totalQuestions)")
+                    .font(.system(.largeTitle, design: .rounded, weight: .black))
+            }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Question \(questionNumber) on \(totalQuestions)")
+                .accessibilityAddTraits(.isHeader)
+            
             Text(question.title)
                 .font(.system(.title, design: .rounded, weight: .bold))
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h1)
+            
             Text(question.hintOrCorrectAnswer)
                 .font(.system(.title, design: .rounded, weight: .bold))
                 .padding(.vertical)
                 .animation(.snappy(duration: 0.80), value: question.isAnswered)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
         }
     }
 }

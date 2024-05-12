@@ -20,7 +20,7 @@ struct QuestionCollectionListView: View {
     
     var body: some View {
         NavigationStack {
-            QuestionCollectionListingView(sort: sortOrder, searchString: searchText)
+            QuestionCollectionSortingView(sort: sortOrder, searchString: searchText)
                 .toolbarBackground(.backgroundColor5.opacity(0.5))
                 .navigationTitle("Your Quizz")
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for your quiz collection")
@@ -77,45 +77,4 @@ struct QuestionCollectionListView: View {
 
     return QuestionCollectionListView()
         .modelContainer(container)
-}
-
-struct QuestionCollectionListingView: View {
-    
-    @Query(sort: [
-        SortDescriptor(\QuestionCollection.title, order: .forward),
-        SortDescriptor(\QuestionCollection.title, order: .reverse)
-    ]) var questionCollections: [QuestionCollection]
-    
-    init(sort: SortDescriptor<QuestionCollection>, searchString: String = "") {
-        _questionCollections = Query(filter: #Predicate {
-            if searchString.isEmpty {
-                true
-            } else {
-                $0.title.localizedStandardContains(searchString)
-            }
-        }, sort: [sort])
-    }
-    
-    var body: some View {
-        List(questionCollections) { collection in
-            ZStack {
-                NavigationLink {
-                    QuestionCollectionDetailView(questionCollection: collection)
-                } label: {
-                    EmptyView()
-                }
-                .opacity(0)
-                QuestionCellListView(questionCollection: collection)
-            }
-            .listRowInsets(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.backgroundColor5)
-        }
-        .listStyle(.plain)
-        .background(.backgroundColor5)
-        .scrollContentBackground(.hidden)
-        .scrollIndicators(.hidden)
-        .background(.backgroundColor5)
-        .contentMargins([.horizontal, .bottom], 10, for: .scrollContent)
-    }
 }

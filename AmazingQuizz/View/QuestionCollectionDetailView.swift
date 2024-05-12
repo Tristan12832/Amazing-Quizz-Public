@@ -17,84 +17,21 @@ struct QuestionCollectionDetailView: View {
     
     @State private var letGoPlaying = false
     
-    @Query(QuestionCollectionDetailView.fetchDescriptor) private var questionsView: [MCQQuestion]
-    
-    static var fetchDescriptor: FetchDescriptor<MCQQuestion> {
-        var descriptor = FetchDescriptor<MCQQuestion>()
-        descriptor.fetchLimit = 5
-        return descriptor
+    private var questions: [MCQQuestion] {
+        return questionCollection.questions
+            .prefix(5)
+            .sorted {
+                $0.index < $1.index
+            }
     }
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    ZStack {
-                        Image(systemName: questionCollection.icon)
-                            .font(.system(size: 128))
-                            .foregroundStyle(Color(hex: questionCollection.color) ?? .gray)
-                            .fixedSize()
-                            .frame(width: 200, height: 200)
-                            .background(.backgroundColor3)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .padding(4)
-                            .background(.backgroundColor4)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                        
-                        if questionCollection.isWin {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.largeTitle)
-                                .foregroundStyle(.green)
-                                .offset(x: 55, y: 50)
-                        }
-                        
-                    }
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Icon: \(questionCollection.icon)")
+                    IconView(questionCollection: questionCollection)
                     
-                    VStack(alignment:.leading, spacing: 4){
-                        Text(questionCollection.title)
-                            .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                            .padding(.vertical)
-                            .accessibilityAddTraits(.isHeader)
-                            .accessibilityHeading(.h1)
-                        
-                        Text("Commentary:")
-                            .font(.system(.title3, design: .rounded, weight: .bold))
-                            .underline()
-                            .accessibilityAddTraits(.isHeader)
-                            .accessibilityHeading(.h2)
-                        
-                        Text(questionCollection.commentary)
-                            .lineLimit(10)
-                        
-                        CustomDivider()
-                        
-                        Text("All the questions in the collection")
-                            .font(.system(.title2, design: .rounded, weight: .bold))
-                            .underline()
-                            .padding(.vertical)
-                            .accessibilityAddTraits(.isHeader)
-                            .accessibilityHeading(.h2)
-                        
-                        VStack {
-                            ForEach(questionsView.indices, id: \.self) { question in
-                                QuestionCellView(
-                                    index: question,
-                                    numberLineLimit: 3,
-                                    question: questionsView[question]
-                                )
-                            }
-                        }
-                        .padding(8)
-                        .padding(.horizontal, 4)
-                        .frame(maxWidth: .infinity)
-                        .background(RoundedRectangle(cornerRadius: 16).fill(.backgroundColor3))
-                        .overlay(alignment: .center) {
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(.backgroundColor4, lineWidth: 4)
-                        }
-                    }
+                    DecDetailCollectionView(questionCollection: questionCollection, questions: questions)
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
@@ -224,8 +161,90 @@ struct QuestionCollectionDetailView: View {
         isWin: true
     )
     
-//    let question = MCQQuestion(title: "", answers: [], hintOrCorrectAnswer: "", index: 0)
-
     return QuestionCollectionDetailView(questionCollection: questionCollection)
         .modelContainer(container)
+}
+
+
+struct IconView: View {
+    
+    var questionCollection: QuestionCollection
+
+    var body: some View {
+        ZStack {
+            Image(systemName: questionCollection.icon)
+                .font(.system(size: 128))
+                .foregroundStyle(Color(hex: questionCollection.color) ?? .gray)
+                .fixedSize()
+                .frame(width: 200, height: 200)
+                .background(.backgroundColor3)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .padding(4)
+                .background(.backgroundColor4)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            
+            if questionCollection.isWin {
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(.green)
+                    .offset(x: 55, y: 50)
+            }
+            
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Icon: \(questionCollection.icon)")
+    }
+}
+
+struct DecDetailCollectionView: View {
+    
+    var questionCollection: QuestionCollection
+
+    var questions: [MCQQuestion]
+
+    var body: some View {
+        VStack(alignment:.leading, spacing: 4){
+            Text(questionCollection.title)
+                .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                .padding(.vertical)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h1)
+            
+            Text("Commentary:")
+                .font(.system(.title3, design: .rounded, weight: .bold))
+                .underline()
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
+            
+            Text(questionCollection.commentary)
+                .lineLimit(10)
+            
+            CustomDivider()
+            
+            Text("All the questions in the collection")
+                .font(.system(.title2, design: .rounded, weight: .bold))
+                .underline()
+                .padding(.vertical)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityHeading(.h2)
+            
+            VStack {
+                ForEach(questions.indices, id: \.self) { question in
+                    QuestionCellView(
+                        index: question,
+                        numberLineLimit: 3,
+                        question: questions[question]
+                    )
+                }
+            }
+            .padding(8)
+            .padding(.horizontal, 4)
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 16).fill(.backgroundColor3))
+            .overlay(alignment: .center) {
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(.backgroundColor4, lineWidth: 4)
+            }
+        }
+    }
 }

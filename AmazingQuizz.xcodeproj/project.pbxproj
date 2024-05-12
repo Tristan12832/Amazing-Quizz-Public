@@ -23,6 +23,7 @@
 		6A8F226F2BBDAB93007A82A6 /* AnswerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F226E2BBDAB93007A82A6 /* AnswerCellView.swift */; };
 		6A8F22712BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F22702BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift */; };
 		6A92B0012BBBE0DC002759B0 /* CustomButtonStyle_BlueBouncy .swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A92B0002BBBE0DC002759B0 /* CustomButtonStyle_BlueBouncy .swift */; };
+		6AA684B02BF1052600CB23BD /* QuestionCollectionSortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA684AF2BF1052600CB23BD /* QuestionCollectionSortingView.swift */; };
 		6AB3B7852BB9CD1B00CE5E6B /* NewQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3B7842BB9CD1B00CE5E6B /* NewQuestionView.swift */; };
 		6AB3B7872BB9D48600CE5E6B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3B7862BB9D48600CE5E6B /* CustomTextField.swift */; };
 		6AB3B7892BB9D50100CE5E6B /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB3B7882BB9D50100CE5E6B /* CustomTextEditor.swift */; };
@@ -60,6 +61,7 @@
 		6A8F226E2BBDAB93007A82A6 /* AnswerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerCellView.swift; path = AmazingQuizz/View/AnswerCellView.swift; sourceTree = SOURCE_ROOT; };
 		6A8F22702BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabViewOfQuestionView.swift; sourceTree = "<group>"; };
 		6A92B0002BBBE0DC002759B0 /* CustomButtonStyle_BlueBouncy .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomButtonStyle_BlueBouncy .swift"; sourceTree = "<group>"; };
+		6AA684AF2BF1052600CB23BD /* QuestionCollectionSortingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCollectionSortingView.swift; sourceTree = "<group>"; };
 		6AB3B7842BB9CD1B00CE5E6B /* NewQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuestionView.swift; sourceTree = "<group>"; };
 		6AB3B7862BB9D48600CE5E6B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTextField.swift; path = AmazingQuizz/View/CustomTextField.swift; sourceTree = SOURCE_ROOT; };
 		6AB3B7882BB9D50100CE5E6B /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomTextEditor.swift; path = AmazingQuizz/View/CustomTextEditor.swift; sourceTree = SOURCE_ROOT; };
@@ -116,6 +118,7 @@
 				6AD282F52B6E5824002BE6C6 /* Styles */,
 				6AD282F32B6E4829002BE6C6 /* QuestionCollectionListView.swift */,
 				6AD950122BC4697A00D6FA28 /* QuestionCollectionSidebarView.swift */,
+				6AA684AF2BF1052600CB23BD /* QuestionCollectionSortingView.swift */,
 				6A4839882B78009900106D9D /* QuestionCollectionDetailView.swift */,
 				6A8F22702BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift */,
 				6A8F226C2BBD7CAD007A82A6 /* PageQuestionView.swift */,
@@ -301,6 +304,7 @@
 				6ABE79132B6A46C200E8DB11 /* AmazingQuizzApp.swift in Sources */,
 				6AB3B7872BB9D48600CE5E6B /* CustomTextField.swift in Sources */,
 				6AB458722BBB434F0042BDCE /* CustomStyleToolbarItem_Simple.swift in Sources */,
+				6AA684B02BF1052600CB23BD /* QuestionCollectionSortingView.swift in Sources */,
 				6AD282F72B6E5840002BE6C6 /* AddButtonStyle.swift in Sources */,
 				6A58FA712B78DC7C00B145BD /* QuestionCellView.swift in Sources */,
 				6AB3B7892BB9D50100CE5E6B /* CustomTextEditor.swift in Sources */,

@@ -20,7 +20,7 @@ struct QuestionCollectionLandscapeView: View {
     
     var body: some View {
         NavigationSplitView {
-            QuestionCollectionSidebarView(sort: sortOrder, searchString: searchText)
+            QuestionCollectionSortingView(sort: sortOrder, searchString: searchText)
                 .navigationTitle("Your Quizz")
                 .searchable(text: $searchText, placement: .sidebar, prompt: "Search for your quiz collection")
                 .padding(.horizontal, 1)
@@ -89,41 +89,42 @@ struct QuestionCollectionLandscapeView: View {
     .modelContainer(container)
 }
 
-struct QuestionCollectionSidebarView: View {
-    @Query(sort: [
-        SortDescriptor(\QuestionCollection.title, order: .forward),
-        SortDescriptor(\QuestionCollection.title, order: .reverse)
-    ]) var questionCollections: [QuestionCollection]
-    
-    init(sort: SortDescriptor<QuestionCollection>, searchString: String = "") {
-        _questionCollections = Query(filter: #Predicate {
-            if searchString.isEmpty {
-                true
-            } else {
-                $0.title.localizedStandardContains(searchString)
-            }
-        }, sort: [sort])
-    }
-    
-    var body: some View {
-        List(questionCollections) { collection in
-            ZStack(alignment: .center) {
-                NavigationLink {
-                    QuestionCollectionDetailView(questionCollection: collection)
-                } label: {
-                    EmptyView()
-                }
-                .opacity(0)
-                QuestionCellListView(questionCollection: collection)
-            }
-            .listRowInsets(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.backgroundColor5)
-            
-        }
-        .scrollContentBackground(.hidden)
-        .background(.backgroundColor5)
-        .contentMargins([.horizontal, .bottom], 10, for: .scrollContent)
-        .toolbarBackground(.backgroundColor5.opacity(0.5))
-    }
-}
+//struct QuestionCollectionSidebarView: View {
+//    @Query(sort: [
+//        SortDescriptor(\QuestionCollection.title, order: .forward),
+//        SortDescriptor(\QuestionCollection.title, order: .reverse)
+//    ]) var questionCollections: [QuestionCollection]
+//    
+//    init(sort: SortDescriptor<QuestionCollection>, searchString: String = "") {
+//        _questionCollections = Query(filter: #Predicate {
+//            if searchString.isEmpty {
+//                true
+//            } else {
+//                $0.title.localizedStandardContains(searchString)
+//            }
+//        }, sort: [sort])
+//    }
+//    
+//    var body: some View {
+//        List(questionCollections) { collection in
+//            ZStack(alignment: .center) {
+//                NavigationLink {
+//                    QuestionCollectionDetailView(questionCollection: collection)
+//                } label: {
+//                    EmptyView()
+//                }
+//                .opacity(0)
+//                QuestionCellListView(questionCollection: collection)
+//            }
+//            .listRowInsets(EdgeInsets(top: 2, leading: 0, bottom: 2, trailing: 0))
+//            .listRowSeparator(.hidden)
+//            .listRowBackground(Color.backgroundColor5)
+//            
+//        }
+//        .scrollContentBackground(.hidden)
+//        .background(.backgroundColor5)
+//        .scrollIndicators(.hidden)
+//        .contentMargins([.horizontal, .bottom], 10, for: .scrollContent)
+//        .toolbarBackground(.backgroundColor5.opacity(0.5))
+//    }
+//}

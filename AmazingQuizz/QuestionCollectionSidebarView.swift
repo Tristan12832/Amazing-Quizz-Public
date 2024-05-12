@@ -9,17 +9,20 @@ import SwiftData
 import SwiftUI
 
 struct QuestionCollectionLandscapeView: View {
-    var questionCollections: [QuestionCollection]
-    
+    @Query private var questionCollections: [QuestionCollection]
+
+    @State private var sortOrder = SortDescriptor(\QuestionCollection.title)
+
     @State private var searchText = ""
     
     @State private var showNewCollection = false
     
+    
     var body: some View {
         NavigationSplitView {
-            QuestionCollectionSidebarView(questionCollections: questionCollections)
-                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for your quiz collection")
+            QuestionCollectionSidebarView(sort: sortOrder, searchString: searchText)
                 .navigationTitle("Your Quizz")
+                .searchable(text: $searchText, placement: .sidebar, prompt: "Search for your quiz collection")
                 .padding(.horizontal, 1)
                 .background(.backgroundColor4)
                 .navigationSplitViewColumnWidth(min: 320, ideal: 350, max: 400)
@@ -30,6 +33,24 @@ struct QuestionCollectionLandscapeView: View {
                         }
                         .buttonStyle(ToolbarButtonStyle())
                     }
+                }
+                .toolbar {
+                    Menu {
+                        Picker("Sort", selection: $sortOrder) {
+                            Text("A-Z")
+                                .tag(SortDescriptor(\QuestionCollection.title, order: .forward))
+                            
+                            Text("Inverse")
+                                .tag(SortDescriptor(\QuestionCollection.title, order: .reverse))
+                        }
+                        .pickerStyle(.inline)
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityLabel("Sorting parameter")
+                    .buttonStyle(ToolbarButtonStyle())
                 }
                 .sheet(isPresented: $showNewCollection) {
                     NewQuestionCollectionView()
@@ -64,15 +85,25 @@ struct QuestionCollectionLandscapeView: View {
     )
     container.mainContext.insert(example)
     
-    return QuestionCollectionLandscapeView(
-        questionCollections: [example]
-    )
+    return QuestionCollectionLandscapeView()
     .modelContainer(container)
-    //        .environment(\.sizeCategory, .large)
 }
 
 struct QuestionCollectionSidebarView: View {
-    var questionCollections: [QuestionCollection]
+    @Query(sort: [
+        SortDescriptor(\QuestionCollection.title, order: .forward),
+        SortDescriptor(\QuestionCollection.title, order: .reverse)
+    ]) var questionCollections: [QuestionCollection]
+    
+    init(sort: SortDescriptor<QuestionCollection>, searchString: String = "") {
+        _questionCollections = Query(filter: #Predicate {
+            if searchString.isEmpty {
+                true
+            } else {
+                $0.title.localizedStandardContains(searchString)
+            }
+        }, sort: [sort])
+    }
     
     var body: some View {
         List(questionCollections) { collection in

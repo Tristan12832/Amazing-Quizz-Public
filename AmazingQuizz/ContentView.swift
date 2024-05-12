@@ -11,14 +11,11 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.prefersTabNavigation) private var prefersTabNavigation
     
-    @Query(sort: \QuestionCollection.title) var questionCollections: [QuestionCollection]
-    
-    
     var body: some View {
         if prefersTabNavigation {
-            QuestionCollectionListView(questionCollections: questionCollections)
+            QuestionCollectionListView()
         } else {
-            QuestionCollectionLandscapeView(questionCollections: questionCollections)
+            QuestionCollectionLandscapeView()
         }
     }
 }

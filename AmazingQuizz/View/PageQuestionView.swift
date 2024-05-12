@@ -10,7 +10,10 @@ import SwiftUI
 
 struct PageQuestionView: View {
     var collection: QuestionCollection
-    @Query(sort: \MCQQuestion.index, order: .forward) private var questions: [MCQQuestion]
+    var questions: [MCQQuestion] {
+        return collection.questions
+            .sorted(by: {$0.index < $1.index})
+    }
     var indexPage: Int
     
     var body: some View {

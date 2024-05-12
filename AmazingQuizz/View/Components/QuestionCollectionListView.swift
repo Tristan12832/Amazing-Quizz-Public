@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct QuestionCollectionListView: View {
-//    @Query(sort: \QuestionCollection.title) var questionCollections: [QuestionCollection]
+
     var questionCollections: [QuestionCollection]
     
     @State private var searchText = ""

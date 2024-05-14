@@ -60,3 +60,15 @@ extension QuestionCollection {
         Color(hex: self.color) ?? Color.accentColor
     }
 }
+
+extension QuestionCollection: Equatable {
+    static func == (lhs: QuestionCollection, rhs: QuestionCollection) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension QuestionCollection: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

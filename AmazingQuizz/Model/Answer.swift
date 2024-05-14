@@ -28,3 +28,15 @@ enum StatusAnswer: String, RawRepresentable, CaseIterable, Codable {
     case correct = "Correct"
     case incorrect = "Incorrect"
 }
+
+extension Answer: Equatable {
+    static func == (lhs: Answer, rhs: Answer) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension Answer: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

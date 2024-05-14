@@ -17,10 +17,11 @@ struct QuestionCollectionLandscapeView: View {
     
     @State private var showNewCollection = false
     
-    
+    @Binding public var selection: QuestionCollection?
+
     var body: some View {
         NavigationSplitView {
-            QuestionCollectionSortingView(sort: sortOrder, searchString: searchText)
+            QuestionCollectionSortingLandscapeView(sort: sortOrder, searchString: searchText, selection: $selection)
                 .navigationTitle("Your Quizz")
                 .searchable(text: $searchText, placement: .sidebar, prompt: "Search for your quiz collection")
                 .padding(.horizontal, 1)
@@ -42,9 +43,13 @@ struct QuestionCollectionLandscapeView: View {
                         .presentationBackground(.regularMaterial)
                 }
         } detail: {
+            if let collection = selection {
+                QuestionCollectionDetailView(questionCollection: collection)
+            } else {
             ContentUnavailableView("No selection", systemImage: "folder.fill")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.backgroundColor5)
+            }
         }
         .navigationSplitViewStyle(.balanced)
 #if os(macOS)
@@ -58,7 +63,7 @@ struct QuestionCollectionLandscapeView: View {
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: QuestionCollection.self, configurations: config)
-    @State var question: QuestionCollection?
+    @State var selection: QuestionCollection?
     let example = QuestionCollection(
         icon: "folder.fill",
         title: "My First Question in my app!",
@@ -70,7 +75,7 @@ struct QuestionCollectionLandscapeView: View {
     )
     container.mainContext.insert(example)
     
-    return QuestionCollectionLandscapeView()
+    return QuestionCollectionLandscapeView( selection: $selection)
     .modelContainer(container)
 }
 

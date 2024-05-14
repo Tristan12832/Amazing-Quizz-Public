@@ -20,7 +20,7 @@ struct QuestionCollectionListView: View {
     
     var body: some View {
         NavigationStack {
-            QuestionCollectionSortingView(sort: sortOrder, searchString: searchText)
+            QuestionCollectionSortingPhoneView(sort: sortOrder, searchString: searchText)
                 .toolbarBackground(.backgroundColor5.opacity(0.5))
                 .navigationTitle("Your Quizz")
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for your quiz collection")

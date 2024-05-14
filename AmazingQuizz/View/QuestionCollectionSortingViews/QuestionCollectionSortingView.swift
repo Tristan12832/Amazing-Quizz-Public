@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct QuestionCollectionSortingView: View {
+struct QuestionCollectionSortingPhoneView: View {
     
     @Query(sort: [
         SortDescriptor(\QuestionCollection.title, order: .forward),
@@ -50,7 +50,7 @@ struct QuestionCollectionSortingView: View {
 }
 
 #Preview {
-    QuestionCollectionSortingView(
+    QuestionCollectionSortingPhoneView(
         sort: SortDescriptor(\QuestionCollection.title),
         searchString: ""
     )

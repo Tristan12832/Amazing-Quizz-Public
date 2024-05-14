@@ -57,8 +57,16 @@ extension MCQQuestion: Comparable {
     }
 }
 
+// Hashable conformance
+extension MCQQuestion: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+// Correct answer computation
 extension MCQQuestion {
-    var correctAnswer: Answer {
-        answers.first(where: { $0.status == .correct }) ?? answers[0]
+    var correctAnswer: Answer? {
+        return answers.first { $0.status == .correct }
     }
 }

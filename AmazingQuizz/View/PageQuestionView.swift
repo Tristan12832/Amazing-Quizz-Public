@@ -54,7 +54,7 @@ struct PageQuestionView: View {
             questions[index].hintOrCorrectAnswer = "Win"
             questions[index].isAnswered = true
         } else {
-            questions[index].hintOrCorrectAnswer = "Faill, the correct answer was \(correctAnswer.title)."
+            questions[index].hintOrCorrectAnswer = "Faill, the correct answer was \(correctAnswer?.title ?? "")."
             questions[index].isAnswered = false
         }
         questions[index].questionAnswered = true

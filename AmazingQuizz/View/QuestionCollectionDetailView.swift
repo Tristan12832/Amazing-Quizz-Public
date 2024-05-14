@@ -86,7 +86,9 @@ struct QuestionCollectionDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        dismiss()
+                        withAnimation {
+                            dismiss()
+                        }
                     } label: {
                         Label("Back", systemImage: "arrow.backward.circle.fill")
                     }
@@ -165,7 +167,7 @@ struct QuestionCollectionDetailView: View {
         .modelContainer(container)
 }
 
-
+//MARK: The different parts of the view
 struct IconView: View {
     
     var questionCollection: QuestionCollection

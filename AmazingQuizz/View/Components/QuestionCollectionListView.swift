@@ -34,23 +34,7 @@ struct QuestionCollectionListView: View {
                     }
                 }
                 .toolbar {
-                    Menu {
-                        Picker("Sort", selection: $sortOrder) {
-                            Text("A-Z")
-                                .tag(SortDescriptor(\QuestionCollection.title, order: .forward))
-
-                            Text("Inverse")
-                                .tag(SortDescriptor(\QuestionCollection.title, order: .reverse))
-                        }
-                        .pickerStyle(.inline)
-                    } label: {
-                        Image(systemName: "slider.horizontal.3")
-                    }
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel("Sorting parameter")
-                    .buttonStyle(ToolbarButtonStyle())
-
+                    CustomMenu(sortOrder: $sortOrder)
                 }
                 .sheet(isPresented: $showNewCollection) {
                     NewQuestionCollectionView()

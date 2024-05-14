@@ -18,9 +18,6 @@ import SwiftData
     var QuestionCollection: QuestionCollection?
     var index: Int
     
-    var correctAnswer: Answer {
-        answers.first(where: { $0.status == .correct }) ?? answers[0]
-    }
     
     init(
         id: UUID = UUID(),
@@ -33,6 +30,7 @@ import SwiftData
         isAnswered: Bool = false,
         questionAnswered: Bool = false,
         hintOrCorrectAnswer: String,
+        QuestionCollection: QuestionCollection? = nil,
         index: Int
     ) {
         self.id = id
@@ -41,6 +39,26 @@ import SwiftData
         self.isAnswered = isAnswered
         self.questionAnswered = questionAnswered
         self.hintOrCorrectAnswer = hintOrCorrectAnswer
+        self.QuestionCollection = QuestionCollection
         self.index = index
+    }
+}
+
+// Equatable and Comparable extensions
+extension MCQQuestion: Equatable {
+    static func == (lhs: MCQQuestion, rhs: MCQQuestion) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension MCQQuestion: Comparable {
+    static func < (lhs: MCQQuestion, rhs: MCQQuestion) -> Bool {
+        return lhs.index < rhs.index
+    }
+}
+
+extension MCQQuestion {
+    var correctAnswer: Answer {
+        answers.first(where: { $0.status == .correct }) ?? answers[0]
     }
 }

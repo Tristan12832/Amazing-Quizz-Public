@@ -15,10 +15,12 @@ import SwiftData
     var isAnswered: Bool
     var MCQQuestion: MCQQuestion?
     
-    init(title: String = "", status: StatusAnswer = .correct, isAnswered: Bool = false) {
+    init(id: UUID = UUID(), title: String = "", status: StatusAnswer = .correct, isAnswered: Bool = false, MCQQuestion: MCQQuestion? = nil) {
+        self.id = id
         self.title = title
         self.status = status
         self.isAnswered = isAnswered
+        self.MCQQuestion = MCQQuestion
     }
 }
 

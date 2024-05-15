@@ -9,13 +9,13 @@ import Foundation
 import SwiftData
 
 @Model class Answer {
-    var id = UUID()
+    let id: String
     var title: String
     var status: StatusAnswer
     var isAnswered: Bool
     var MCQQuestion: MCQQuestion?
     
-    init(id: UUID = UUID(), title: String = "", status: StatusAnswer = .correct, isAnswered: Bool = false, MCQQuestion: MCQQuestion? = nil) {
+    init(id: String = UUID().uuidString, title: String = "", status: StatusAnswer = .correct, isAnswered: Bool = false, MCQQuestion: MCQQuestion? = nil) {
         self.id = id
         self.title = title
         self.status = status

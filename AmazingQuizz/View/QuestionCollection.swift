@@ -10,7 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model class QuestionCollection {
-    var id = UUID()
+    let id: String
     var icon: String
     @Attribute(.unique) var title: String
     @Relationship(deleteRule: .cascade, inverse: \MCQQuestion.QuestionCollection) var questions = [MCQQuestion]()
@@ -25,7 +25,7 @@ import SwiftUI
     var isWin: Bool
    
     init(
-        id: UUID = UUID(),
+        id: String = UUID().uuidString,
         icon: String,
         title: String,
         questions: [MCQQuestion] = [MCQQuestion](),

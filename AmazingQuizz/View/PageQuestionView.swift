@@ -71,45 +71,14 @@ struct PageQuestionView: View {
     }
 }
 
-#Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
-    
-    let exampleCollection = QuestionCollection(
-        icon: "folder.fill",
-        title: "My First Question in my app!",
-        commentary: "The comments for the question are located here!",
-        color: "#4c87b3",
-        isFavorite: true,
-        isComplet: true,
-        isWin: true
-    )
-    let example = MCQQuestion(
-        title: "Combien fait 2 +2 ?",
-        answers: [
-            Answer(
-                title: "2",
-                status: .incorrect,
-                isAnswered: false
-            ),
-            Answer(
-                title: "4",
-                status: .correct,
-                isAnswered: false
-            ),
-            Answer(
-                title: "5",
-                status: .incorrect,
-                isAnswered: false
-            )
-        ],
-        hintOrCorrectAnswer: "", index: 0
-    )
-    container.mainContext.insert(example)
-    
-    return PageQuestionView(collection: exampleCollection, indexPage: 0)
-        .modelContainer(container)
-    
+#Preview("Page_Question_Preview") {
+    do {
+        let preview = try Previewer()
+        return PageQuestionView(collection: preview.questionCollection_Simple, indexPage: 0)
+            .modelContainer(preview.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }
 
 struct QuestionContent: View {
@@ -148,16 +117,15 @@ struct AnswerViews: View {
     var question: MCQQuestion
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
-    
-    init(question: MCQQuestion, checkQuestionAction: @escaping (Int, MCQQuestion) -> Void) {
-        self.question = question
-        self.checkQuestionAction = checkQuestionAction
+
+    var answers: [Answer] {
+        return question.answers
     }
     
     var body: some View {
         VStack {
-            ForEach(question.answers.indices, id: \.self) { index in
-                AnswerCellView(answer: question.answers[index]) {
+            ForEach(answers.indices, id: \.self) { index in
+                AnswerCellView(answer: answers[index]) {
                     self.checkQuestionAction(index, self.question)
                 }
                 .id(index)

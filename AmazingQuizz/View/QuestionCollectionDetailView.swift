@@ -117,54 +117,15 @@ struct QuestionCollectionDetailView: View {
 }
 
 #Preview("MyPreview",traits: .sizeThatFitsLayout) {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: QuestionCollection.self, configurations: config)
-    
-    let questionCollection = QuestionCollection(
-        icon: "folder.fill",
-        title: "My First Question in my app!",
-        questions: Array(
-            repeating: MCQQuestion(
-                title: "Question: TEST",
-                answers: [],
-                hintOrCorrectAnswer: "",
-                index: 0
-            ),
-            count: 5
-        ),
-        commentary: "The comments for the question are located here!",
-        color: "#4c87b3",
-        isFavorite: true,
-        isComplet: false,
-        isWin: false
-    )
-    container.mainContext.insert(questionCollection)
-    
-//    let question = MCQQuestion(title: "", answers: [], hintOrCorrectAnswer: "", index: 0)
-    
-    return NavigationStack { QuestionCollectionDetailView(questionCollection: questionCollection)
+    do {
+        let preview = try Previewer()
+        return QuestionCollectionDetailView(
+            questionCollection: preview.questionCollection
+        )
+            .modelContainer(preview.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
     }
-    .modelContainer(container)
-    //        .environment(\.sizeCategory, .large)
-    
-}
-
-#Preview("Preview") {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: QuestionCollection.self, configurations: config)
-    
-    let questionCollection = QuestionCollection(
-        icon: "folder.fill",
-        title: "My First Question in my app!",
-        commentary: "The comments for the question are located here!",
-        color: "#4c87b3",
-        isFavorite: true,
-        isComplet: false,
-        isWin: true
-    )
-    
-    return QuestionCollectionDetailView(questionCollection: questionCollection)
-        .modelContainer(container)
 }
 
 //MARK: The different parts of the view

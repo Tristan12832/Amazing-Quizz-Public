@@ -45,20 +45,11 @@ struct QuestionCollectionListView: View {
 }
 
 #Preview("MyPreview", traits: .sizeThatFitsLayout) {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: QuestionCollection.self, configurations: config)
-    
-    let example = QuestionCollection(
-        icon: "folder.fill",
-        title: "My First Question in my app!",
-        commentary: "The comments for the question are located here!",
-        color: "#4c87b3",
-        isFavorite: true,
-        isComplet: true,
-        isWin: true
-    )
-    container.mainContext.insert(example)
-
-    return QuestionCollectionListView()
-        .modelContainer(container)
+    do {
+        let preview = try Previewer()
+        return QuestionCollectionListView()
+            .modelContainer(preview.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

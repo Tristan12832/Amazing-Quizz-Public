@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model class MCQQuestion {
-    var id = UUID()
+    let id: String
     var title: String
     @Relationship(deleteRule: .cascade, inverse: \Answer.MCQQuestion) var answers = [Answer]()
     var isAnswered: Bool
@@ -20,7 +20,7 @@ import SwiftData
     
     
     init(
-        id: UUID = UUID(),
+        id: String = UUID().uuidString,
         title: String,
         score: Double = 0.0,
         correctAnswersCount: Int = 0,

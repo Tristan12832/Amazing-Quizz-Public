@@ -84,42 +84,11 @@ struct MyTabViewOfQuestionView: View {
 }
 
 #Preview("Preview") {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: QuestionCollection.self, configurations: config)
-    
-    let exampleCollection = QuestionCollection(
-        icon: "folder.fill",
-        title: "My First Question in my app!",
-        questions: [MCQQuestion(
-            title: "Combien fait 2 +2 ?",
-            answers: [
-                Answer(
-                    title: "2",
-                    status: .incorrect,
-                    isAnswered: false
-                ),
-                Answer(
-                    title: "4",
-                    status: .correct,
-                    isAnswered: false
-                ),
-                Answer(
-                    title: "5",
-                    status: .incorrect,
-                    isAnswered: false
-                )
-            ],
-            hintOrCorrectAnswer: "", index: 0
-        )],
-        commentary: "The comments for the question are located here!",
-        color: "#4c87b3",
-        isFavorite: true,
-        isComplet: true,
-        isWin: true
-    )
-    container.mainContext.insert(exampleCollection)
-    
-    return MyTabViewOfQuestionView(collection: exampleCollection
-    )
-    .modelContainer(container)
+    do {
+        let preview = try Previewer()
+        return MyTabViewOfQuestionView(collection: preview.questionCollection)
+            .modelContainer(preview.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

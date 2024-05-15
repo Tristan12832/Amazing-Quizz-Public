@@ -110,15 +110,10 @@ struct ResultView: View {
 
 #Preview("ResultView") {
     do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: QuestionCollection.self, configurations: config)
-        
-        let example = QuestionCollection(icon: "", title: "", commentary: "", color: "", isFavorite: false, isComplet: false, isWin: false)
-        container.mainContext.insert(example)
-        
-        return ResultView(questionCollection: example)
-            .modelContainer(container)
+        let preview = try Previewer()
+        return ResultView(questionCollection: preview.questionCollection)
+            .modelContainer(preview.container)
     } catch {
-        fatalError("Failed to create model container.")
+        return Text("Failed to create preview: \(error.localizedDescription)")
     }
 }

@@ -5,7 +5,6 @@
 //  Created by Tristan Stenuit on 03/02/2024.
 //
 
-import Foundation
 import SwiftUI
 
 struct PrincipalActionButtonStyle: ButtonStyle {

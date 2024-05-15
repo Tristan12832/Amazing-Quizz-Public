@@ -58,22 +58,11 @@ struct QuestionCellView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
-    
-    let example = MCQQuestion(
-        title: "Question",
-        answers: Array(repeating: Answer(), count: 3),
-        isAnswered: true,
-        questionAnswered: true,
-        hintOrCorrectAnswer: "OK",
-        index: 0
-    )
-    return QuestionCellView(
-        index: 0,
-        numberLineLimit: 0,
-        question: example
-    )
-    .modelContainer(container)
-    
+    do {
+        let preview = try Previewer()
+        return QuestionCellView(index: 0, numberLineLimit: 3, question: preview.question)
+            .modelContainer(preview.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

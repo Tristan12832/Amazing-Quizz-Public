@@ -13,10 +13,15 @@ struct MyTabViewOfQuestionView: View {
     @State private var indexPage: Int = 0
     var collection: QuestionCollection
 
+    var questions: [MCQQuestion] {
+        return collection.questions
+            .sorted(by: {$0.index < $1.index})
+    }
+
     var body: some View {
         NavigationStack {
             TabView(selection: $indexPage) {
-                PageQuestionView(collection: collection, indexPage: indexPage)
+                PageQuestionView(collection: collection, questions: questions, indexPage: indexPage)
                     .id(collection.id)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))

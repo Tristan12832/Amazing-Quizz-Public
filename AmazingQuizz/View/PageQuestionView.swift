@@ -10,10 +10,7 @@ import SwiftUI
 
 struct PageQuestionView: View {
     var collection: QuestionCollection
-    var questions: [MCQQuestion] {
-        return collection.questions
-            .sorted(by: {$0.index < $1.index})
-    }
+    var questions: [MCQQuestion]
     var indexPage: Int
     
     var body: some View {
@@ -74,7 +71,7 @@ struct PageQuestionView: View {
 #Preview("Page_Question_Preview") {
     do {
         let preview = try Previewer()
-        return PageQuestionView(collection: preview.questionCollection_Simple, indexPage: 0)
+        return PageQuestionView(collection: preview.questionCollection, questions: preview.questionCollection.questions, indexPage: 0)
             .modelContainer(preview.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
@@ -128,7 +125,7 @@ struct AnswerViews: View {
                 AnswerCellView(answer: answers[index]) {
                     self.checkQuestionAction(index, self.question)
                 }
-                .id(index)
+                .id(answers[index].id)
             }
             .disabled(question.questionAnswered)
         }

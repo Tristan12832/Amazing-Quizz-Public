@@ -17,21 +17,22 @@ struct QuestionCollectionDetailView: View {
     
     @State private var letGoPlaying = false
     
+    @State private var nvp = NavigationPath()
+
     private var questions: [MCQQuestion] {
         return questionCollection.questions
-            .prefix(5)
             .sorted {
                 $0.index < $1.index
             }
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $nvp) {
             ScrollView {
                 VStack {
                     IconView(questionCollection: questionCollection)
                     
-                    DecDetailCollectionView(questionCollection: questionCollection, questions: questions)
+                    DecDetailCollectionView(questionCollection: questionCollection, questions: questions, nvp: $nvp)
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
@@ -44,11 +45,20 @@ struct QuestionCollectionDetailView: View {
                 CustomDivider()
                     .padding(.horizontal, 16)
                 
+//MARK: The two buttons to launch two different methods for reading questions/answers.
+/// CustomMainActionButton
+/// Button("Start Navigation")
                 CustomMainActionButton(title: "Playing!", color: .accentColor) {
                     letGoPlaying = true
                 }
                 .padding(.horizontal, 16)
                 
+                Button("Start Navigation") {
+                    if let firstPage = questions.first {
+                        nvp.append(firstPage)
+                    }
+                }
+                .buttonStyle(NextOrPastButton(foregroundColor: Color.secondary))
             }
             .scrollContentBackground(.hidden)
             .toolbarBackground(.backgroundColor5, for: .bottomBar, .navigationBar)
@@ -56,6 +66,13 @@ struct QuestionCollectionDetailView: View {
             .background(.backgroundColor5)
             .toolbarBackground(.hidden, for: .navigationBar)
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(for: MCQQuestion.self) { question in
+                PlayingQuestionView(
+                    path: $nvp,
+                    question: question,
+                    questions: questions
+                )
+            }
             .navigationDestination(isPresented: $letGoPlaying) {
                 MyTabViewOfQuestionView(collection: questionCollection)
             }
@@ -164,7 +181,9 @@ struct DecDetailCollectionView: View {
     var questionCollection: QuestionCollection
 
     var questions: [MCQQuestion]
-
+    
+    @Binding var nvp: NavigationPath
+    
     var body: some View {
         VStack(alignment:.leading, spacing: 4){
             Text(questionCollection.title)
@@ -209,5 +228,6 @@ struct DecDetailCollectionView: View {
                     .stroke(.backgroundColor4, lineWidth: 4)
             }
         }
+        //NAVIGATION
     }
 }

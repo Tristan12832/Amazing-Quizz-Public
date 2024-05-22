@@ -58,7 +58,9 @@ struct QuestionCollectionDetailView: View {
                         nvp.append(firstPage)
                     }
                 }
-                .buttonStyle(NextOrPastButton(foregroundColor: Color.secondary))
+                .buttonStyle(.customButtonStyle_OrangeBouncy)
+                .padding(.horizontal, 16)
+
             }
             .scrollContentBackground(.hidden)
             .toolbarBackground(.backgroundColor5, for: .bottomBar, .navigationBar)

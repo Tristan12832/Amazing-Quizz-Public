@@ -143,7 +143,7 @@ struct PlayingQuestionView: View {
                 isAnswered: false
             )
         ],
-        hintOrCorrectAnswer: "", index: 0
+        hintOrCorrectAnswer: "2 x 2", index: 0
     )
     container.mainContext.insert(example)
     
@@ -154,21 +154,30 @@ struct PlayingQuestionView: View {
 }
 
 struct AnswerViews2: View {
+    
+    struct AnswerPlacement: Hashable, Identifiable {
+        var id: Self { self }
+        var index: Int
+        var answer: Answer
+    }
+    
     var question: MCQQuestion
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
 
-    var answers: [Answer] {
-        return question.answers
+    private var answerPlacements: [AnswerPlacement] {
+        question.answers.indices.map { index in
+            AnswerPlacement(index: index, answer: question.answers[index])
+        }
     }
     
     var body: some View {
         VStack {
-            ForEach(answers.indices, id: \.self) { index in
-                AnswerCellView(answer: answers[index]) {
-                    self.checkQuestionAction(index, self.question)
+            ForEach(answerPlacements) { placement in
+                AnswerCellView(answer: placement.answer) {
+                    self.checkQuestionAction(placement.index, self.question)
                 }
-                .id(answers[index].id)
+                .id(placement.answer.id)
             }
             .disabled(question.questionAnswered)
         }

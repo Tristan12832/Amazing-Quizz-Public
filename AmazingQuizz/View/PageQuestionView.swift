@@ -69,13 +69,36 @@ struct PageQuestionView: View {
 }
 
 #Preview("Page_Question_Preview") {
-    do {
-        let preview = try Previewer()
-        return PageQuestionView(collection: preview.questionCollection, questions: preview.questionCollection.questions, indexPage: 0)
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
+
+    let example = MCQQuestion(
+        title: "Combien font 2 +2 ?",
+        answers: [
+            Answer(
+                title: "2",
+                status: .incorrect,
+                isAnswered: false
+            ),
+            Answer(
+                title: "4",
+                status: .correct,
+                isAnswered: false
+            ),
+            Answer(
+                title: "5",
+                status: .incorrect,
+                isAnswered: false
+            )
+        ],
+        hintOrCorrectAnswer: "2 x 2", index: 0
+    )
+    container.mainContext.insert(example)
+    
+    return NavigationStack {
+        PlayingQuestionView(path: .constant(NavigationPath()), question: example, questions: [example])
     }
+        .modelContainer(container)
 }
 
 struct QuestionContent: View {

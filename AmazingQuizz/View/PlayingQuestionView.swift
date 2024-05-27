@@ -125,7 +125,7 @@ struct PlayingQuestionView: View {
     let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
 
     let example = MCQQuestion(
-        title: "Combien fait 2 +2 ?",
+        title: "Combien font 2 +2 ?",
         answers: [
             Answer(
                 title: "2",

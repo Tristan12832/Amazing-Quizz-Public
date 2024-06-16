@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model class MCQQuestion {
-    let id: String
+    let id = UUID()
     var title: String
     @Relationship(deleteRule: .cascade, inverse: \Answer.MCQQuestion) var answers = [Answer]()
     var isAnswered: Bool
@@ -19,21 +19,7 @@ import SwiftData
     var index: Int
     
     
-    init(
-        id: String = UUID().uuidString,
-        title: String,
-        score: Double = 0.0,
-        correctAnswersCount: Int = 0,
-        incorrectAnswersCount: Int = 0,
-        unansweredQuestion: Int = 0,
-        answers: [Answer],
-        isAnswered: Bool = false,
-        questionAnswered: Bool = false,
-        hintOrCorrectAnswer: String,
-        QuestionCollection: QuestionCollection? = nil,
-        index: Int
-    ) {
-        self.id = id
+    init(title: String, score: Double = 0.0, correctAnswersCount: Int = 0, incorrectAnswersCount: Int = 0, unansweredQuestion: Int = 0, answers: [Answer], isAnswered: Bool = false, questionAnswered: Bool = false, hintOrCorrectAnswer: String, QuestionCollection: QuestionCollection? = nil, index: Int) {
         self.title = title
         self.answers = answers.shuffled()
         self.isAnswered = isAnswered
@@ -47,7 +33,7 @@ import SwiftData
 // Equatable and Comparable extensions
 extension MCQQuestion: Equatable {
     static func == (lhs: MCQQuestion, rhs: MCQQuestion) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.answers == rhs.answers && lhs.questionAnswered == rhs.questionAnswered && lhs.isAnswered == rhs.isAnswered
     }
 }
 
@@ -61,6 +47,13 @@ extension MCQQuestion: Comparable {
 extension MCQQuestion: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(answers)
+        hasher.combine(isAnswered)
+        hasher.combine(questionAnswered)
+        hasher.combine(hintOrCorrectAnswer)
+        hasher.combine(QuestionCollection)
+        hasher.combine(index)
     }
 }
 

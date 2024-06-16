@@ -53,7 +53,7 @@ struct QuestionCollectionDetailView: View {
                 }
                 .padding(.horizontal, 16)
                 
-                Button("Start Navigation") {
+                Button("Start Navigation //TEST") {
                     if let firstPage = questions.first {
                         nvp.append(firstPage)
                     }

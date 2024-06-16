@@ -10,7 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model class QuestionCollection {
-    let id: String
+    let id = UUID()
     var icon: String
     @Attribute(.unique) var title: String
     @Relationship(deleteRule: .cascade, inverse: \MCQQuestion.QuestionCollection) var questions = [MCQQuestion]()
@@ -24,22 +24,7 @@ import SwiftUI
     var isComplet: Bool
     var isWin: Bool
    
-    init(
-        id: String = UUID().uuidString,
-        icon: String,
-        title: String,
-        questions: [MCQQuestion] = [MCQQuestion](),
-        commentary: String,
-        color: String,
-        score: Double = 0.0,
-        correctAnswersCount: Int = 0,
-        incorrectAnswersCount: Int = 0,
-        unansweredQuestion: Int = 0,
-        isFavorite: Bool,
-        isComplet: Bool,
-        isWin: Bool
-    ) {
-        self.id = id
+    init(icon: String, title: String, questions: [MCQQuestion] = [MCQQuestion](), commentary: String, color: String, score: Double = 0.0, correctAnswersCount: Int = 0, incorrectAnswersCount: Int = 0, unansweredQuestion: Int = 0, isFavorite: Bool, isComplet: Bool, isWin: Bool) {
         self.icon = icon
         self.title = title
         self.questions = questions

@@ -30,16 +30,12 @@ enum StatusAnswer: String, RawRepresentable, CaseIterable, Codable {
 
 extension Answer: Equatable {
     static func == (lhs: Answer, rhs: Answer) -> Bool {
-        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.status == rhs.status && lhs.isAnswered == rhs.isAnswered && lhs.MCQQuestion == rhs.MCQQuestion
+        return lhs.id == rhs.id
     }
 }
 
 extension Answer: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(title)
-        hasher.combine(status)
-        hasher.combine(isAnswered)
-        hasher.combine(MCQQuestion)
     }
 }

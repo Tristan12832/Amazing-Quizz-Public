@@ -47,13 +47,6 @@ extension MCQQuestion: Comparable {
 extension MCQQuestion: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(title)
-        hasher.combine(answers)
-        hasher.combine(isAnswered)
-        hasher.combine(questionAnswered)
-        hasher.combine(hintOrCorrectAnswer)
-        hasher.combine(QuestionCollection)
-        hasher.combine(index)
     }
 }
 

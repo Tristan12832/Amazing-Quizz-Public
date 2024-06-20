@@ -60,6 +60,7 @@
 		6A58FA722B78E17B00B145BD /* ToolbarButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToolbarButtonStyle.swift; path = AmazingQuizz/View/ToolbarButtonStyle.swift; sourceTree = SOURCE_ROOT; };
 		6A6B6DFE2B77CA4C008151D9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		6A6B6E002B77CAB5008151D9 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		6A8C14F52C24B37B0054BA1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6A8F22662BBD76E0007A82A6 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		6A8F22682BBD77A0007A82A6 /* NextOrPastButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NextOrPastButton.swift; path = AmazingQuizz/View/NextOrPastButton.swift; sourceTree = SOURCE_ROOT; };
 		6A8F226A2BBD7815007A82A6 /* ItemToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemToolbar.swift; sourceTree = SOURCE_ROOT; };
@@ -187,6 +188,7 @@
 		6ABE79062B6A46C200E8DB11 = {
 			isa = PBXGroup;
 			children = (
+				6A8C14F52C24B37B0054BA1C /* README.md */,
 				6ABE79112B6A46C200E8DB11 /* AmazingQuizz */,
 				6ABE79102B6A46C200E8DB11 /* Products */,
 			);

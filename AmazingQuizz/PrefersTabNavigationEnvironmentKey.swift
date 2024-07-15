@@ -4,6 +4,8 @@
 //
 //  Created by Tristan Stenuit on 08/04/2024.
 //
+// //MARK: Note:
+// This piece of code is derived from the sample project presented at WWDC23 session 102 (State of the Union).
 
 import SwiftUI
 

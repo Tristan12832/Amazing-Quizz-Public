@@ -11,7 +11,7 @@ import SwiftData
 @Model class MCQQuestion {
     let id = UUID()
     var title: String
-    @Relationship(deleteRule: .cascade, inverse: \Answer.MCQQuestion) var answers = [Answer]()
+    @Relationship(deleteRule: .cascade, inverse: \Answer.MCQQuestion) var answers: [Answer]
     var isAnswered: Bool
     var questionAnswered: Bool
     var hintOrCorrectAnswer: String

@@ -13,7 +13,7 @@ import SwiftUI
     let id = UUID()
     var icon: String
     @Attribute(.unique) var title: String
-    @Relationship(deleteRule: .cascade, inverse: \MCQQuestion.QuestionCollection) var questions = [MCQQuestion]()
+    @Relationship(deleteRule: .cascade, inverse: \MCQQuestion.QuestionCollection) var questions: [MCQQuestion]
     var commentary: String
     var color: String
     var score: Double //Push to CollectionModel

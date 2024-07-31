@@ -49,11 +49,9 @@ struct CcustomTextFieldOfAnswer: View {
                     .foregroundColor(Color.accentColor)
             }
         }
-        .background(.backgroundColor4)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .background(.backgroundColor4, in: RoundedRectangle(cornerRadius: 16))
         .padding(4)
-        .background(.backgroundColor3)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .background(.backgroundColor3, in: RoundedRectangle(cornerRadius: 16))
     }
 }
 

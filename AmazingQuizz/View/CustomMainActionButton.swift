@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomMainActionButton: View {
     var title: String
     var color: Color = .accent
-    var action: () -> ()
+    var action: () -> Void
     @State private var isPress: Bool = false
     
     var body: some View {
@@ -26,8 +26,7 @@ struct CustomMainActionButton: View {
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .background(color)
-                .clipShape(RoundedRectangle(cornerRadius: .infinity))
+                .background(color, in: RoundedRectangle(cornerRadius: .infinity))
                 .shadow(radius: 10)
                 .scaleEffect(isPress ? 0.5 : 1.0)
                 .animation(.bouncy, value: isPress)

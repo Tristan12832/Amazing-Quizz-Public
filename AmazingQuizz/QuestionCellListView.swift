@@ -21,18 +21,16 @@ struct QuestionCellListView: View {
                         .padding()
                         .frame(width: 100, height: 100)
                         .clipShape(.rect(cornerRadius: 16))
-                        .background(.backgroundColor2)
-                        .clipShape(.rect(cornerRadius: 16))
+                        .background(.backgroundColor2, in: .rect(cornerRadius: 16))
                         .padding(4)
-                        .background(.backgroundColor3)
-                        .clipShape(.rect(cornerRadius: 16))
+                        .background(.backgroundColor3, in: .rect(cornerRadius: 16))
                         .padding(.horizontal, 4)
-                    .foregroundStyle(questionCollection.hexColor)
+                    .foregroundStyle(questionCollection.hexColor.shadow(.drop(radius: 1, x: 2, y: 2)))
                     
                     if questionCollection.isWin {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.title2)
-                            .foregroundStyle(.green)
+                            .foregroundStyle(.green.shadow(.drop(radius: 1, x: 2, y: 2)))
                             .offset(x: 18, y:15)
                     }
                 }
@@ -65,11 +63,9 @@ struct QuestionCellListView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 120)
-        .background(.backgroundColor4)
-        .clipShape(.rect(cornerRadius: 16))
+        .background(.backgroundColor4, in: .rect(cornerRadius: 16))
         .padding(4)
-        .background(.backgroundColor3)
-        .clipShape(.rect(cornerRadius: 16))
+        .background(.backgroundColor3, in: .rect(cornerRadius: 16))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(
             """

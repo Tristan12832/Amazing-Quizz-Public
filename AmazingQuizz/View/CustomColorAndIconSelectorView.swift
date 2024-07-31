@@ -76,14 +76,13 @@ struct CustomColorAndIconSelectorView: View {
                                 .foregroundStyle(item == selectedIcon ? Color(uiColor: .systemGray5) : Color(uiColor: .systemGray6))
                                 .overlay(
                                     Image(systemName: item)
-                                        .foregroundColor(item == selectedIcon ? colorIcon : .primary)
+                                        .foregroundStyle(item == selectedIcon ? colorIcon : .primary)
                                         .font(.system(size: 32))
                                         .fixedSize()
                                 )
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                 .padding(4)
-                                .background(item == selectedIcon ? colorIcon : .backgroundColor1)
-                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .background(item == selectedIcon ? colorIcon : .backgroundColor1, in: RoundedRectangle(cornerRadius: 16))
                         }
                     }
                     .padding(.horizontal, 2)
@@ -92,13 +91,9 @@ struct CustomColorAndIconSelectorView: View {
                 .padding(.horizontal, 4)
                 .frame(maxHeight: .infinity)
             }
-            .background(.backgroundColor3)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(.backgroundColor3, in: RoundedRectangle(cornerRadius: 16))
             .padding(4)
-            .background(.backgroundColor2)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            
-            
+            .background(.backgroundColor2, in: RoundedRectangle(cornerRadius: 16))
         }
     }
 }

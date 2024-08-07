@@ -33,13 +33,7 @@ import SwiftData
 // Equatable and Comparable extensions
 extension MCQQuestion: Equatable {
     static func == (lhs: MCQQuestion, rhs: MCQQuestion) -> Bool {
-        return lhs.id == rhs.id && lhs.title == rhs.title && lhs.answers == rhs.answers && lhs.questionAnswered == rhs.questionAnswered && lhs.isAnswered == rhs.isAnswered
-    }
-}
-
-extension MCQQuestion: Comparable {
-    static func < (lhs: MCQQuestion, rhs: MCQQuestion) -> Bool {
-        return lhs.index < rhs.index
+        lhs.id == rhs.id
     }
 }
 

@@ -27,6 +27,9 @@ struct QuestionCollectionLandscapeView: View {
                 .padding(.horizontal, 1)
                 .background(.backgroundColor4)
                 .navigationSplitViewColumnWidth(min: 320, ideal: 350, max: 400)
+            #if !os(macOS)
+                .tint(.selectionList)
+            #endif
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button("Add a new quiz collection", systemImage: "plus") {

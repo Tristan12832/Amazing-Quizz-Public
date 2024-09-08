@@ -137,9 +137,11 @@ struct AnswerViews: View {
     var question: MCQQuestion
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
-
+    
+    @Query private var answersOfQuestion: [Answer]
     var answers: [Answer] {
-        return question.answers
+        return answersOfQuestion
+            .filter { $0.MCQQuestion?.id == question.id }
     }
     
     var body: some View {

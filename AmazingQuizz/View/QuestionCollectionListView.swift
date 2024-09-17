@@ -20,17 +20,39 @@ struct QuestionCollectionListView: View {
     
     var body: some View {
         NavigationStack {
-            QuestionCollectionSortingPhoneView(sort: sortOrder, searchString: searchText)
+            Group {
+                if !questionCollections.isEmpty {
+                    QuestionCollectionSortingPhoneView(sort: sortOrder, searchString: searchText)
+                } else {
+                    ContentUnavailableView(
+                        label: {
+                            Label("Creat", systemImage: "plus.rectangle.on.folder.fill")
+                        },
+                        description: {
+                            Text("Creat your first question collection.")
+                        },
+                        actions: {
+                            Button("Creat new collection", systemImage: "plus") {
+                                self.showNewCollection = true
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    )
+                    .background(.backgroundColor5)
+                }
+            }
                 .toolbarBackground(.backgroundColor5.opacity(0.5))
                 .navigationTitle("Your Quizz")
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for your quiz collection")
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Button("Add a new quiz collection", systemImage: "plus") {
-                            self.showNewCollection = true
+                    if !questionCollections.isEmpty {
+                        ToolbarItem(placement: .primaryAction) {
+                            Button("Add a new quiz collection", systemImage: "plus") {
+                                self.showNewCollection = true
+                            }
+                            .buttonStyle(ToolbarButtonStyle())
+                            .accessibilityHint("Press 'Add New Quiz Collection' to create a new quiz collection in your list within the application!")
                         }
-                        .buttonStyle(ToolbarButtonStyle())
-                        .accessibilityHint("Press 'Add New Quiz Collection' to create a new quiz collection in your list within the application!")
                     }
                 }
                 .toolbar {

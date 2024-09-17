@@ -11,7 +11,7 @@ struct CcustomTextFieldOfAnswer: View {
     
     @Binding var statusAnswer: StatusAnswer
     @Binding var answer: String
-    @Binding var numberAnswer: Int
+    var numberAnswer: Int
     
     private var colorTextField: Color {
         switch statusAnswer {
@@ -56,5 +56,5 @@ struct CcustomTextFieldOfAnswer: View {
 }
 
 #Preview {
-    CcustomTextFieldOfAnswer(statusAnswer: .constant(.correct), answer: .constant(""), numberAnswer: .constant(1))
+    CcustomTextFieldOfAnswer(statusAnswer: .constant(.correct), answer: .constant(""), numberAnswer: 1)
 }

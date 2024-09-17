@@ -31,11 +31,13 @@ struct QuestionCollectionLandscapeView: View {
                 .tint(.selectionList)
             #endif
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Add a new quiz collection", systemImage: "plus") {
-                            self.showNewCollection = true
+                    if !questionCollections.isEmpty {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("Add a new quiz collection", systemImage: "plus") {
+                                self.showNewCollection = true
+                            }
+                            .buttonStyle(ToolbarButtonStyle())
                         }
-                        .buttonStyle(ToolbarButtonStyle())
                     }
                 }
                 .toolbar {
@@ -49,7 +51,26 @@ struct QuestionCollectionLandscapeView: View {
             if let collection = selection {
                 QuestionCollectionDetailView(questionCollection: collection)
             } else {
-            ContentUnavailableView("No selection", systemImage: "folder.fill")
+                Group {
+                if !questionCollections.isEmpty {
+                    ContentUnavailableView("No selection", systemImage: "folder.fill", description: Text("Select a question collection from the sidebar."))
+                } else {
+                    ContentUnavailableView(
+                        label: {
+                            Label("Creat", systemImage: "plus.rectangle.on.folder.fill")
+                        },
+                        description: {
+                            Text("Creat your first question collection.")
+                        },
+                        actions: {
+                            Button("Creat new collection", systemImage: "plus") {
+                                self.showNewCollection = true
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    )
+                }
+            }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.backgroundColor5)
             }

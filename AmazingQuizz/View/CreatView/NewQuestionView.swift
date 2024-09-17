@@ -16,9 +16,7 @@ struct NewQuestionView: View {
     
     //MARK: Next, I'd like to stay in this view to create a series of questions, one after the other...
     //    @State private var pushNextNewQuestionView = false
-    
-    @State private var counterAnswer = Array(repeating: 1, count: 1)
-    
+        
     //MARK: Question
     @State private var title = ""
     @State private var hintOrCorrectAnswer
@@ -26,7 +24,6 @@ struct NewQuestionView: View {
     
     //MARK: Answers
     @State private var answers = [Answer(title: "", status: .correct)]
-    @State private var numberAnswer = 1
     @State private var statusAnswer: StatusAnswer = .correct
     @State private var answerTitle = Array(repeating: "", count: 1)
     
@@ -82,7 +79,7 @@ struct NewQuestionView: View {
                             CcustomTextFieldOfAnswer(
                                 statusAnswer: $answers[index].status,
                                 answer: $answers[index].title,
-                                numberAnswer: $counterAnswer[index]
+                                numberAnswer: index + 1
                             )
                         }
                         
@@ -92,7 +89,6 @@ struct NewQuestionView: View {
                                 
                                 Button("Add a answer", systemImage: "plus") {
                                     answers.append(Answer(title: "", status: .correct))
-                                    counterAnswer.append(1)
                                 }
                                 .buttonStyle(.customButtonStyle_OrangeBouncy)
                                 .opacity(!questionIsEmpty ? 0.4 : 1)

@@ -26,7 +26,7 @@ struct QuestionCollectionLandscapeView: View {
                 .searchable(text: $searchText, placement: .sidebar, prompt: "Search for your quiz collection")
                 .padding(.horizontal, 1)
                 .background(.backgroundColor4)
-                .navigationSplitViewColumnWidth(min: 320, ideal: 350, max: 400)
+                .navigationSplitViewColumnWidth(min: 360, ideal: 400, max: 600)
             #if !os(macOS)
                 .tint(.selectionList)
             #endif

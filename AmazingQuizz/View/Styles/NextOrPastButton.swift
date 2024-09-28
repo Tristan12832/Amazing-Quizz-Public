@@ -24,7 +24,7 @@ struct NextOrPastButton: ButtonStyle {
 }
 
 #Preview("NextOrPastButton") {
-    Button(action: { print("Pressed") }) {
+    Button(action: {}) {
         Label("Press Me", systemImage: "star")
     }
     .buttonStyle(NextOrPastButton(foregroundColor: .cyan))

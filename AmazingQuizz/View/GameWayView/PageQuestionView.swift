@@ -138,19 +138,19 @@ struct AnswerViews: View {
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
     
-    @Query private var answersOfQuestion: [Answer]
-    var answers: [Answer] {
-        return answersOfQuestion
-            .filter { $0.MCQQuestion?.id == question.id }
-    }
+//    @Query private var answersOfQuestion: [Answer]
+//    var answers: [Answer] {
+//        return answersOfQuestion
+//            .filter { $0.MCQQuestion?.id == question.id }
+//    }
     
     var body: some View {
         VStack {
-            ForEach(answers.indices, id: \.self) { index in
-                AnswerCellView(answer: answers[index]) {
+            ForEach(question.answers.indices, id: \.self) { index in
+                AnswerCellView(answer: question.answers[index]) {
                     self.checkQuestionAction(index, self.question)
                 }
-                .id(answers[index].id)
+                .id(question.answers[index].id)
             }
             .disabled(question.questionAnswered)
         }

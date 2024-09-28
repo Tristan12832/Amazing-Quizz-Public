@@ -51,7 +51,7 @@ struct QuestionCollectionSortingLandscapeView: View {
 }
 
 #Preview {
-    @State var selection: QuestionCollection?
+    @Previewable @State var selection: QuestionCollection?
     
     return QuestionCollectionSortingLandscapeView(
         sort: SortDescriptor(\QuestionCollection.title),

@@ -21,18 +21,21 @@ struct QuestionCollectionDetailView: View {
 
     private var questions: [MCQQuestion] {
         return questionCollection.questions
-            .sorted {
-                $0.index < $1.index
-            }
     }
     
     var body: some View {
         NavigationStack(path: $nvp) {
             ScrollView {
                 VStack {
-                    IconView(questionCollection: questionCollection)
+                    IconView(
+                        questionCollection: questionCollection
+                    )
                     
-                    DecDetailCollectionView(questionCollection: questionCollection, questions: questions, nvp: $nvp)
+                    DecDetailCollectionView(
+                        questionCollection: questionCollection,
+                        questions: questions,
+                        nvp: $nvp
+                    )
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
@@ -127,7 +130,6 @@ struct QuestionCollectionDetailView: View {
                         }
                         .buttonStyle(CustomButtonStyle_BlueBouncy())
                         .accessibilityHint("Press to add a new question.")
-
                     }
                 }
             }

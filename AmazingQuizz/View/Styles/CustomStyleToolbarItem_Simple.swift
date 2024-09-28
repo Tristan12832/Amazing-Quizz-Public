@@ -29,7 +29,7 @@ extension ButtonStyle where Self == CustomStyleToolbarItem_Simple {
 }
 
 #Preview {
-    Button(action: { print("Pressed") }) {
+    Button(action: {}) {
         Label("Press Me", systemImage: "star")
     }
     .buttonStyle(CustomStyleToolbarItem_Simple())

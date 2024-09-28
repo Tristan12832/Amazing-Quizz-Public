@@ -32,7 +32,7 @@ struct ItemToolbar: ButtonStyle {
 }
 
 #Preview("ItemToolbar", traits: .sizeThatFitsLayout) {
-    Button(action: { print("Pressed") }) {
+    Button(action: {}) {
         Label("Press Me", systemImage: "star")
     }
     .buttonStyle(ItemToolbar(color: .white))

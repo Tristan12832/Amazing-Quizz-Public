@@ -85,7 +85,7 @@ struct QuestionCollectionLandscapeView: View {
 }
 
 #Preview {
-    @State var selection: QuestionCollection?
+    @Previewable @State var selection: QuestionCollection?
     do {
         let preview = try Previewer()
         return QuestionCollectionLandscapeView(selection: $selection)

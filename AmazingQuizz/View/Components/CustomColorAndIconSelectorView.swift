@@ -99,8 +99,8 @@ struct CustomColorAndIconSelectorView: View {
 }
 
 #Preview("ColorIconPickerView") {
-    @State var colorIcon = Color.accent
-    @State var selectedIcon = ""
+    @Previewable @State var colorIcon = Color.accent
+    @Previewable @State var selectedIcon = ""
     
     return CustomColorAndIconSelectorView(colorIcon: $colorIcon, selectedIcon: $selectedIcon)
         .padding()

@@ -35,7 +35,7 @@ extension ButtonStyle where Self == PrincipalActionButtonStyle {
 }
 
 #Preview {
-    Button(action: { print("Pressed") }) {
+    Button(action: {}) {
         Label("Add new collection", systemImage: "plus")
     }
     .buttonStyle(PrincipalActionButtonStyle(colorText: .white, colorBackground: .accent, font: .title2))

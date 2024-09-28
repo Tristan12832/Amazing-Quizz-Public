@@ -30,7 +30,7 @@ extension ButtonStyle where Self == CustomButtonStyle_BlueBouncy {
 }
 
 #Preview("CustomButtonStyle_BlueBouncy") {
-    Button(action: { print("Pressed") }) {
+    Button(action: {}) {
         Label("Press Me", systemImage: "star")
     }
     .buttonStyle(CustomButtonStyle_BlueBouncy())

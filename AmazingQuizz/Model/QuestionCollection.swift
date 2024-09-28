@@ -10,7 +10,7 @@ import SwiftData
 import SwiftUI
 
 @Model class QuestionCollection {
-    let id = UUID()
+    var id = UUID()
     var icon: String
     @Attribute(.unique) var title: String
     @Relationship(deleteRule: .cascade, inverse: \MCQQuestion.QuestionCollection) var questions: [MCQQuestion]

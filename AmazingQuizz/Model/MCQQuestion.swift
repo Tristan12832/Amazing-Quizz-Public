@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model class MCQQuestion {
-    let id = UUID()
+    var id = UUID()
     var title: String
     @Relationship(deleteRule: .cascade, inverse: \Answer.MCQQuestion) var answers: [Answer]
     var isAnswered: Bool

@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model class Answer {
-    let id = UUID()
+    var id = UUID()
     var title: String
     var status: StatusAnswer
     var isAnswered: Bool

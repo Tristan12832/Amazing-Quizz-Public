@@ -81,9 +81,9 @@ struct QuestionCollectionDetailView: View {
             .navigationDestination(isPresented: $letGoPlaying) {
                 MyTabViewOfQuestionView(collection: questionCollection)
             }
-            .fullScreenCover(isPresented: $showNewQuestion, content: {
+            .fullScreenCover(isPresented: $showNewQuestion) {
                 NewQuestionView(questionCollection: questionCollection)
-            })
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Favorite", systemImage: questionCollection.isFavorite ? "heart.fill" : "heart") {
@@ -137,16 +137,9 @@ struct QuestionCollectionDetailView: View {
     }
 }
 
-#Preview("MyPreview",traits: .sizeThatFitsLayout) {
-    do {
-        let preview = try Previewer()
-        return QuestionCollectionDetailView(
-            questionCollection: preview.questionCollection
-        )
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+#Preview("MyPreview",traits: .sizeThatFitsLayout, .mockData) {
+    @Previewable @Query var questionCollection: [QuestionCollection]
+    QuestionCollectionDetailView( questionCollection: questionCollection[0])
 }
 
 //MARK: The different parts of the view

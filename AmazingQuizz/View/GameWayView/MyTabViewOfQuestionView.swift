@@ -12,17 +12,21 @@ struct MyTabViewOfQuestionView: View {
     @Environment(\.dismiss) var dismiss
     @State private var indexPage: Int = 0
     var collection: QuestionCollection
-
+    
     var questions: [MCQQuestion] {
         return collection.questions
             .sorted(by: {$0.index < $1.index})
     }
-
+    
     var body: some View {
         NavigationStack {
             TabView(selection: $indexPage) {
-                PageQuestionView(collection: collection, questions: questions, indexPage: indexPage)
-                    .id(collection.id)
+                PageQuestionView(
+                    collection: collection,
+                    questions: questions,
+                    indexPage: indexPage
+                )
+                .id(collection.id)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .background {
@@ -88,12 +92,7 @@ struct MyTabViewOfQuestionView: View {
     }
 }
 
-#Preview("Preview") {
-    do {
-        let preview = try Previewer()
-        return MyTabViewOfQuestionView(collection: preview.questionCollection)
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+#Preview("Preview", traits: .mockData) {
+    @Previewable @Query var collections: [QuestionCollection]
+    MyTabViewOfQuestionView(collection: collections[0])
 }

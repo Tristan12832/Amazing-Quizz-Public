@@ -108,12 +108,8 @@ struct ResultView: View {
     }
 }
 
-#Preview("ResultView") {
-    do {
-        let preview = try Previewer()
-        return ResultView(questionCollection: preview.questionCollection)
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+#Preview("ResultView", traits: .mockData) {
+    @Previewable @Query var collections: [QuestionCollection]
+    ResultView(questionCollection: collections[0])
 }
+

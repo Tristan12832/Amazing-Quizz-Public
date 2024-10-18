@@ -22,14 +22,6 @@ struct ContentView: View {
     }
 }
 
-#Preview("Preview") {
-    do {
-        let preview = try Previewer()
-        return ContentView()
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
-    //        .environment(\.sizeCategory, .large)
-
+#Preview("Preview", traits: .mockData) {
+    ContentView()
 }

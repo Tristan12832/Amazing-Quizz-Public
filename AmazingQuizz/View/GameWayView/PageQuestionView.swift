@@ -14,26 +14,32 @@ struct PageQuestionView: View {
     var indexPage: Int
     
     var body: some View {
-        ForEach(questions.indices, id: \.self) { questionIndex in
-
-            ScrollView {
+        ForEach(questions) { questionIndex in
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    QuestionContent(question: questions[questionIndex], questionNumber: indexPage + 1, totalQuestions: questions.count)
+                    QuestionContent(
+                        question: questionIndex,
+                        questionNumber: indexPage + 1,
+                        totalQuestions: questions.count
+                    )
                         .padding(.vertical)
                     
-                    AnswerViews(question: questions[questionIndex], checkQuestionAction: checkQuestion)
+                    AnswerViews(
+                        question: questionIndex,
+                        checkQuestionAction: checkQuestion
+                    )
                         .id(questionIndex)
                         .padding(.vertical)
                     
                     VStack {
                         Button("Reset") {
                             withAnimation (.bouncy(duration: 0.66)){
-                                restGame(questions[questionIndex])
+                                restGame(questionIndex)
                             }
                         }
                         .buttonStyle(.customButtonStyle_OrangeBouncy)
                         .accessibilityHint("Press ‘reset’ to reset the current question.")
-
+                        
                     }
                 }
                 .padding(.horizontal)
@@ -68,37 +74,9 @@ struct PageQuestionView: View {
     }
 }
 
-#Preview("Page_Question_Preview") {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
-
-    let example = MCQQuestion(
-        title: "Combien font 2 +2 ?",
-        answers: [
-            Answer(
-                title: "2",
-                status: .incorrect,
-                isAnswered: false
-            ),
-            Answer(
-                title: "4",
-                status: .correct,
-                isAnswered: false
-            ),
-            Answer(
-                title: "5",
-                status: .incorrect,
-                isAnswered: false
-            )
-        ],
-        hintOrCorrectAnswer: "2 x 2", index: 0
-    )
-    container.mainContext.insert(example)
-    
-    return NavigationStack {
-        PlayingQuestionView(path: .constant(NavigationPath()), question: example, questions: [example])
-    }
-        .modelContainer(container)
+#Preview("Page_Question_Preview", traits: .navigationTrait, .mockData) {
+    @Previewable @Query var questions: [MCQQuestion]
+    PlayingQuestionView(path: .constant(NavigationPath()), question: questions[0], questions: questions)
 }
 
 struct QuestionContent: View {
@@ -114,9 +92,9 @@ struct QuestionContent: View {
                 Text("\(questionNumber) / \(totalQuestions)")
                     .font(.system(.largeTitle, design: .rounded, weight: .black))
             }
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Question \(questionNumber) on \(totalQuestions)")
-                .accessibilityAddTraits(.isHeader)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Question \(questionNumber) on \(totalQuestions)")
+            .accessibilityAddTraits(.isHeader)
             
             Text(question.title)
                 .font(.system(.title, design: .rounded, weight: .bold))
@@ -138,11 +116,11 @@ struct AnswerViews: View {
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
     
-//    @Query private var answersOfQuestion: [Answer]
-//    var answers: [Answer] {
-//        return answersOfQuestion
-//            .filter { $0.MCQQuestion?.id == question.id }
-//    }
+    //    @Query private var answersOfQuestion: [Answer]
+    //    var answers: [Answer] {
+    //        return answersOfQuestion
+    //            .filter { $0.MCQQuestion?.id == question.id }
+    //    }
     
     var body: some View {
         VStack {

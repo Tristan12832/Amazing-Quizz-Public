@@ -66,12 +66,6 @@ struct QuestionCollectionListView: View {
     }
 }
 
-#Preview("MyPreview", traits: .sizeThatFitsLayout) {
-    do {
-        let preview = try Previewer()
-        return QuestionCollectionListView()
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+#Preview("MyPreview", traits: .sizeThatFitsLayout, .mockData) {
+    QuestionCollectionListView()
 }

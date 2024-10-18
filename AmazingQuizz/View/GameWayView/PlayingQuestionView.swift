@@ -19,7 +19,7 @@ struct PlayingQuestionView: View {
     var body: some View {
         let currentIndex = questions.firstIndex(where: { $0.id == question.id })
         
-        return ScrollView {
+        return ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 QuestionContent(
                     question: question,
@@ -120,37 +120,9 @@ struct PlayingQuestionView: View {
     }
 }
 
-#Preview("Preview") {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: MCQQuestion.self, configurations: config)
-
-    let example = MCQQuestion(
-        title: "Combien font 2 +2 ?",
-        answers: [
-            Answer(
-                title: "2",
-                status: .incorrect,
-                isAnswered: false
-            ),
-            Answer(
-                title: "4",
-                status: .correct,
-                isAnswered: false
-            ),
-            Answer(
-                title: "5",
-                status: .incorrect,
-                isAnswered: false
-            )
-        ],
-        hintOrCorrectAnswer: "2 x 2", index: 0
-    )
-    container.mainContext.insert(example)
-    
-    return NavigationStack {
-        PlayingQuestionView(path: .constant(NavigationPath()), question: example, questions: [example])
-    }
-        .modelContainer(container)
+#Preview("Preview", traits: .navigationTrait, .mockData) {
+    @Previewable @Query var questions: [MCQQuestion]
+    PlayingQuestionView(path: .constant(NavigationPath()), question: questions[0], questions: questions)
 }
 
 struct AnswerViews2: View {

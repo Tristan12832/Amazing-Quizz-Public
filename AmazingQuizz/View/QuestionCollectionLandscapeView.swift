@@ -84,13 +84,7 @@ struct QuestionCollectionLandscapeView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .mockData) {
     @Previewable @State var selection: QuestionCollection?
-    do {
-        let preview = try Previewer()
-        return QuestionCollectionLandscapeView(selection: $selection)
-            .modelContainer(preview.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    QuestionCollectionLandscapeView(selection: $selection)
 }

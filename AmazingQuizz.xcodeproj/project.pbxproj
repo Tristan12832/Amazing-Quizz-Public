@@ -30,6 +30,7 @@
 		6A4839892B78009900106D9D /* QuestionCollectionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4839882B78009900106D9D /* QuestionCollectionDetailView.swift */; };
 		6A6B6DFF2B77CA4C008151D9 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6DFE2B77CA4C008151D9 /* UIColor+Hex.swift */; };
 		6A6B6E012B77CAB5008151D9 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B6E002B77CAB5008151D9 /* Color+Hex.swift */; };
+		6A7DC65A2CC285CF0010A4A9 /* PreviewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A7DC6592CC285CD0010A4A9 /* PreviewModifiers.swift */; };
 		6A8F22672BBD76E0007A82A6 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F22662BBD76E0007A82A6 /* ResultView.swift */; };
 		6A8F226D2BBD7CAD007A82A6 /* PageQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F226C2BBD7CAD007A82A6 /* PageQuestionView.swift */; };
 		6A8F22712BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F22702BBDC2D4007A82A6 /* MyTabViewOfQuestionView.swift */; };
@@ -72,6 +73,7 @@
 		6A4839882B78009900106D9D /* QuestionCollectionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCollectionDetailView.swift; sourceTree = "<group>"; };
 		6A6B6DFE2B77CA4C008151D9 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		6A6B6E002B77CAB5008151D9 /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		6A7DC6592CC285CD0010A4A9 /* PreviewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewModifiers.swift; sourceTree = "<group>"; };
 		6A8C14F52C24B37B0054BA1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6A8F22662BBD76E0007A82A6 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		6A8F226C2BBD7CAD007A82A6 /* PageQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageQuestionView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,14 @@
 				6A8F22662BBD76E0007A82A6 /* ResultView.swift */,
 			);
 			path = GameWayView;
+			sourceTree = "<group>";
+		};
+		6A7DC6582CC285B10010A4A9 /* PreviewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				6A7DC6592CC285CD0010A4A9 /* PreviewModifiers.swift */,
+			);
+			path = PreviewModifiers;
 			sourceTree = "<group>";
 		};
 		6AB78F9F2B6AD50D008EE3F4 /* View */ = {
@@ -212,6 +222,7 @@
 		6ABE79112B6A46C200E8DB11 /* AmazingQuizz */ = {
 			isa = PBXGroup;
 			children = (
+				6A7DC6582CC285B10010A4A9 /* PreviewModifiers */,
 				6ABE79122B6A46C200E8DB11 /* AmazingQuizzApp.swift */,
 				6ABE79142B6A46C200E8DB11 /* ContentView.swift */,
 				6AB78FA22B6AD57C008EE3F4 /* Extentions */,
@@ -337,6 +348,7 @@
 				6ABE79152B6A46C200E8DB11 /* ContentView.swift in Sources */,
 				6AB4586A2BBAE7DF0042BDCE /* Answer.swift in Sources */,
 				6A40BD9B2C5AD9100059EA35 /* CustomColorAndIconSelectorView.swift in Sources */,
+				6A7DC65A2CC285CF0010A4A9 /* PreviewModifiers.swift in Sources */,
 				6A40BDA32C5AD9A70059EA35 /* QuestionCellView.swift in Sources */,
 				6ABE79132B6A46C200E8DB11 /* AmazingQuizzApp.swift in Sources */,
 				6A40BDAB2C5ADB730059EA35 /* NewQuestionCollectionView.swift in Sources */,
@@ -411,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -468,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

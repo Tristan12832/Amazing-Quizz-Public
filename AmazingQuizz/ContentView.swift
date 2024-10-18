@@ -22,6 +22,6 @@ struct ContentView: View {
     }
 }
 
-#Preview("Preview", traits: .mockData) {
+#Preview("Preview HomeScreen", traits: .mockData) {
     ContentView()
 }

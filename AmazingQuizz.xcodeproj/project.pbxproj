@@ -222,10 +222,10 @@
 		6ABE79112B6A46C200E8DB11 /* AmazingQuizz */ = {
 			isa = PBXGroup;
 			children = (
-				6A7DC6582CC285B10010A4A9 /* PreviewModifiers */,
 				6ABE79122B6A46C200E8DB11 /* AmazingQuizzApp.swift */,
 				6ABE79142B6A46C200E8DB11 /* ContentView.swift */,
 				6AB78FA22B6AD57C008EE3F4 /* Extentions */,
+				6A7DC6582CC285B10010A4A9 /* PreviewModifiers */,
 				6A40BDAF2C5ADBEA0059EA35 /* Navigation */,
 				6AB78FA02B6AD525008EE3F4 /* Model */,
 				6AB78F9F2B6AD50D008EE3F4 /* View */,

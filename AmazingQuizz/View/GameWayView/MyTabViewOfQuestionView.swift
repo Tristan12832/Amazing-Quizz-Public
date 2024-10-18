@@ -14,8 +14,7 @@ struct MyTabViewOfQuestionView: View {
     var collection: QuestionCollection
     
     var questions: [MCQQuestion] {
-        return collection.questions
-            .sorted(by: {$0.index < $1.index})
+        collection.questions
     }
     
     var body: some View {

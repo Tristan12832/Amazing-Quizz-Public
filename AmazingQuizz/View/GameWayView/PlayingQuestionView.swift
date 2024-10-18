@@ -14,8 +14,7 @@ struct PlayingQuestionView: View {
     
     public var question: MCQQuestion
     public var questions: [MCQQuestion]
-    
-    
+
     var body: some View {
         let currentIndex = questions.firstIndex(where: { $0.id == question.id })
         
@@ -127,29 +126,17 @@ struct PlayingQuestionView: View {
 
 struct AnswerViews2: View {
     
-    struct AnswerPlacement: Hashable, Identifiable {
-        var id: Self { self }
-        var index: Int
-        var answer: Answer
-    }
-    
     var question: MCQQuestion
     // This action must be passed to the view.
     var checkQuestionAction: (Int, MCQQuestion) -> Void
-
-    private var answerPlacements: [AnswerPlacement] {
-        question.answers.indices.map { index in
-            AnswerPlacement(index: index, answer: question.answers[index])
-        }
-    }
     
     var body: some View {
         VStack {
-            ForEach(answerPlacements) { placement in
-                AnswerCellView(answer: placement.answer) {
-                    self.checkQuestionAction(placement.index, self.question)
+            ForEach(question.answers.indices, id: \.self) { index in
+                AnswerCellView(answer: question.answers[index]) {
+                    self.checkQuestionAction(index, self.question)
                 }
-                .id(placement.answer.id)
+                .id(question.answers[index].id)
             }
             .disabled(question.questionAnswered)
         }
